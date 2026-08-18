@@ -1,0 +1,145 @@
+{% extends "admin/base.html" %}
+{% block title %}Administrator Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div>
+            <h1>Administrator Dashboard</h1>
+            <p>Welcome, {{ admin }}</p>
+        </div>
+
+        <div class="header-buttons">
+            <a href="{{ url_for('results') }}" class="btn btn-primary">
+                View Results
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+
+        <div class="stat-card blue">
+            <h2>{{ total_students }}</h2>
+            <p>Total Students</p>
+        </div>
+
+        <div class="stat-card green">
+            <h2>{{ total_candidates }}</h2>
+            <p>Candidates</p>
+        </div>
+
+        <div class="stat-card orange">
+            <h2>{{ total_votes }}</h2>
+            <p>Votes Cast</p>
+        </div>
+
+        <div class="stat-card red">
+            <h2>{{ votes_remaining }}</h2>
+            <p>Not Voted</p>
+        </div>
+
+    </div>
+
+
+    <!-- Quick Actions -->
+
+    <div class="section-title">
+        Quick Actions
+    </div>
+
+    <div class="action-grid">
+        <div>
+        <a href="{{ url_for('students') }}" class="action-card">
+            👨‍🎓
+            <span>Manage Students</span>
+        </a>
+        </div>
+        <div>
+        <a href="{{ url_for('candidates') }}" class="action-card">
+            🗳️
+            <span>Manage Candidates</span>
+        </a>
+        </div>
+        <div>
+        <a href="{{ url_for('positions') }}" class="action-card">
+            📌
+            <span>Manage Positions</span>
+        </a>
+        </div>
+        <div>
+        <a href="{{ url_for('results') }}" class="action-card">
+            📊
+            <span>Election Results</span>
+        </a>
+        </div>
+        <div><a href="{{ url_for('profile') }}" class="action-card">
+            👤
+            <span>Account</span>
+        </a>
+        </div>
+    </div>
+
+
+    <!-- Results Table -->
+
+    <div class="table-card">
+
+        <h2>Current Leaders</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+                <th>Photo</th>
+                <th>Candidate</th>
+                <th>Position</th>
+                <th>Votes</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for row in leaders %}
+
+            <tr>
+
+                <td>
+
+                    {% if row.photo %}
+                    <img class="candidate-photo"
+                         src="{{ url_for('static', filename='uploads/' + row.photo) }}">
+                    {% endif %}
+
+                </td>
+
+                <td>{{ row.fullname }}</td>
+
+                <td>{{ row.position }}</td>
+
+                <td>{{ row.votes }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div class="footer">
+
+        © 2026 Kigezi High School Online Voting System; By Nasasira Edwin 2023-2026...I SERVE
+
+</div>
+{% endblock %}

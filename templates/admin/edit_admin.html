@@ -1,0 +1,103 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Edit Administrator{% endblock %}
+
+{% block heading %}Edit Administrator{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <div class="form-card">
+
+        <h2>
+            <i class="fas fa-user-edit"></i>
+            Edit Administrator
+        </h2>
+
+        {% if success %}
+            <div class="alert success">{{ success }}</div>
+        {% endif %}
+
+        {% if error %}
+            <div class="alert error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <input type="text"
+                       name="username"
+                       value="{{ admin.username }}"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>New Password</label>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Leave blank to keep current password">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Role</label>
+
+                <select name="role">
+
+                    <option value="admin"
+                    {% if admin.role=="admin" %}selected{% endif %}>
+                    Administrator
+                    </option>
+
+                    <option value="superadmin"
+                    {% if admin.role=="superadmin" %}selected{% endif %}>
+                    Super Administrator
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select name="status">
+
+                    <option value="Active"
+                    {% if admin.status=="Active" %}selected{% endif %}>
+                    Active
+                    </option>
+
+                    <option value="Inactive"
+                    {% if admin.status=="Inactive" %}selected{% endif %}>
+                    Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button class="btn-save">
+
+                <i class="fas fa-save"></i>
+
+                Update Administrator
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

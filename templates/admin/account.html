@@ -1,0 +1,75 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Account Control{% endblock %}
+
+{% block heading %}Account Control{% endblock %}
+
+{% block content %}
+
+<div class="account-container">
+
+    <!-- Left Profile Card -->
+    <div class="profile-card">
+
+         <img src="{{ url_for('static', filename='uploads/' + admin.photo) }}" 
+     alt="Profile Picture" 
+     class="profile-picture">
+
+        <h2>{{ admin.username }}</h2>
+
+        <p>{{ admin.role|title }}</p>
+
+        <span class="status {{ admin.status|lower }}">
+            {{ admin.status }}
+        </span>
+
+        <form action="{{ url_for('upload_admin_photo') }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <input type="file" name="photo">
+
+            <button type="submit">
+                Upload Photo
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="account-content">
+
+        <div class="account-menu">
+
+            <a href="/profile">
+                <i class="fas fa-user"></i>
+                My Profile
+            </a>
+
+            <a href="{{ url_for('admin_change_password') }}">
+                <i class="fas fa-lock"></i>
+                Change Password
+            </a>
+
+            {% if session["role"]=="superadmin" %}
+
+            <a href="/manage_admins">
+                <i class="fas fa-users-cog"></i>
+                Manage Administrators
+            </a>
+
+            <a href="/system_settings">
+                <i class="fas fa-cogs"></i>
+                System Settings
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

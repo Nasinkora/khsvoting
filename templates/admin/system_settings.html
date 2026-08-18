@@ -1,0 +1,92 @@
+{% extends "admin/base.html" %}
+
+{% block title %}System Settings{% endblock %}
+
+{% block heading %}System Settings{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+<h2>
+<i class="fas fa-cogs"></i>
+System Settings
+</h2>
+
+<form method="POST"
+enctype="multipart/form-data">
+
+<label>School Name</label>
+
+<input
+type="text"
+name="school_name"
+value="{{ settings.school_name }}">
+
+<label>School Logo</label>
+
+<img src="{{ url_for('static',filename='uploads/'+settings.school_logo) }}"
+class="logo-preview">
+
+<input
+type="hidden"
+name="current_logo"
+value="{{ settings.school_logo }}">
+
+<input
+type="file"
+name="logo">
+
+<label>Voting Status</label>
+
+<select name="voting_status">
+
+<option value="Open"
+{% if settings.voting_status=="Open" %}selected{% endif %}>
+Open
+</option>
+
+<option value="Closed"
+{% if settings.voting_status=="Closed" %}selected{% endif %}>
+Closed
+</option>
+
+</select>
+
+<label>Election Start Date</label>
+
+<input
+type="date"
+name="start_date"
+value="{{ settings.start_date }}">
+
+<label>Election End Date</label>
+
+<input
+type="date"
+name="end_date"
+value="{{ settings.end_date }}">
+
+<br><br>
+
+<button class="btn-save">
+
+<i class="fas fa-save"></i>
+
+Save Settings
+
+</button>
+
+</form>
+<a href="{{ url_for('reset_election') }}"
+   class="btn btn-danger"
+   onclick="return confirm('This will delete ALL votes and allow every student to vote again. Continue?');">
+
+<i class="fas fa-rotate-left"></i>
+
+Reset Election
+
+</a>
+</div>
+
+{% endblock %}

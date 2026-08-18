@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Election Results</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-bottom:30px;
+}
+
+th{
+    background:#003366;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+img{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+}
+
+.winner{
+    background:#d4edda;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 align="center">
+Election Results
+</h1>
+
+{% for position, candidates in results.items() %}
+
+<h2>{{ position }}</h2>
+
+<table>
+
+<tr>
+<th>Rank</th>
+<th>Photo</th>
+<th>Candidate</th>
+<th>Votes</th>
+<th>Status</th>
+</tr>
+
+{% for candidate in candidates %}
+
+<tr class="{% if loop.first %}winner{% endif %}">
+
+<td>{{ loop.index }}</td>
+
+<td>
+<img src="{{ url_for('static', filename='uploads/' + candidate['photo']) }}">
+</td>
+
+<td>{{ candidate['fullname'] }}</td>
+
+<td>{{ candidate['votes'] }}</td>
+
+<td>
+{% if loop.first %}
+🏆 Winner
+{% else %}
+Candidate
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+<hr class="divider">
+
+<h2>Election Winners</h2>
+
+<table class="winner-table">
+
+    <thead>
+
+        <tr>
+            <th>Position</th>
+            <th>Photo</th>
+            <th>Winner</th>
+            <th>Votes</th>
+            <th>Status</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for winner in winners %}
+
+        <tr>
+
+            <td>{{ winner.position }}</td>
+
+            <td>
+
+                <img src="{{ url_for('static', filename='uploads/' + winner.photo) }}"
+                     class="winner-photo">
+
+            </td>
+
+            <td>{{ winner.fullname }}</td>
+
+            <td>{{ winner.total_votes }}</td>
+
+            <td>
+
+                <span class="winner-badge">
+
+                    WINNER
+
+                </span>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+<hr class="divider">
+
+<h2>Election Winners</h2>
+
+<table class="winner-table">
+
+    <thead>
+
+        <tr>
+            <th>Position</th>
+            <th>Photo</th>
+            <th>Winner</th>
+            <th>Votes</th>
+            <th>Status</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for winner in winners %}
+
+        <tr>
+
+            <td>{{ winner.position }}</td>
+
+            <td>
+
+                <img src="{{ url_for('static', filename='uploads/' + winner.photo) }}"
+                     class="winner-photo">
+
+            </td>
+
+            <td>{{ winner.fullname }}</td>
+
+            <td>{{ winner.total_votes }}</td>
+
+            <td>
+
+                <span class="winner-badge">
+
+                    WINNER
+
+                </span>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+</table>
+
+{% endfor %}
+
+<br>
+
+<a href="/student_dashboard">
+← Back to Dashboard
+</a>
+
+</div>
+
+</body>
+</html>

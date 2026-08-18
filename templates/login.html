@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+<div class="login-box">
+
+    <h1>Kigezi High School</h1>
+
+    <h2>Student Login</h2>
+
+    <form action="/login" method="POST">
+
+        <label>Student ID</label>
+
+        <input
+            type="text"
+            name="student_id"
+            placeholder="Enter Student ID"
+            required>
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required>
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/">← Back Home</a>
+
+</div>
+
+</body>
+</html>

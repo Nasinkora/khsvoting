@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Candidate</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+<h1 align="center">Edit Candidate</h1>
+
+<form method="POST"
+      enctype="multipart/form-data"
+      style="width:400px;margin:auto;">
+
+<label>Full Name</label>
+
+<input
+type="text"
+name="fullname"
+value="{{ candidate[1] }}"
+required>
+
+<br><br>
+
+<label>Position</label>
+
+<select name="position">
+
+{% for position in positions %}
+
+<option
+value="{{ position[0] }}"
+{% if candidate[2]==position[0] %}selected{% endif %}>
+{{ position[0] }}
+</option>
+
+{% endfor %}
+
+</select>
+
+<br><br>
+
+<label>Replace Photo</label>
+
+<input
+type="file"
+name="photo">
+
+<br><br>
+
+<button type="submit">
+Update Candidate
+</button>
+
+</form>
+
+</body>
+
+</html>

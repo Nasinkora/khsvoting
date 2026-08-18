@@ -1,0 +1,87 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Add Administrator{% endblock %}
+
+{% block heading %}Add New Administrator{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <div class="form-card">
+
+        <h2><i class="fas fa-user-plus"></i> Add Administrator</h2>
+
+        {% if error %}
+            <div class="alert error">{{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="alert success">{{ success }}</div>
+        {% endif %}
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <input type="text"
+                       name="username"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       name="password"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Role</label>
+
+                <select name="role">
+
+                    <option value="admin">Administrator</option>
+
+                    <option value="superadmin">Super Administrator</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select name="status">
+
+                    <option value="Active">Active</option>
+
+                    <option value="Inactive">Inactive</option>
+
+                </select>
+
+            </div>
+
+            <button class="btn-save">
+
+                <i class="fas fa-save"></i>
+
+                Create Administrator
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,190 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Election Results{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Election Results</h1>
+        <p>Live election results grouped by position.</p>
+    </div>
+
+    <div class="page-actions">
+
+     <button onclick="window.print()" class="print-btn">
+       <i class="fas fa-print"></i> Print Results
+     </button>
+
+    {% if published == 0 %}
+
+    <a href="{{ url_for('publish_results') }}" class="publish-btn">
+        <i class="fas fa-upload"></i>
+        Publish Results
+    </a>
+
+    {% else %}
+
+    <a href="{{ url_for('unpublish_results') }}" class="unpublish-btn">
+        <i class="fas fa-eye-slash"></i>
+        Unpublish Results
+    </a>
+
+    {% endif %}
+
+</div>
+<!-- ================= RESULTS ================= -->
+
+<div id="print-area">
+
+{% for position in positions %}
+
+<div class="result-card">
+
+    <h2 class="position-title">
+        {{ position }}
+    </h2>
+
+    <table class="results-table">
+
+        <thead>
+
+            <tr>
+                <th>Photo</th>
+                <th>Candidate Name</th>
+                <th>Post</th>
+                <th>Total Votes</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for candidate in results %}
+
+            {% if candidate.position == position %}
+
+            <tr>
+
+                <td>
+
+                    {% if candidate.photo %}
+
+                    <img src="{{ url_for('static', filename='uploads/' + candidate.photo) }}"
+                         class="candidate-photo">
+
+                    {% else %}
+
+                    No Photo
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ candidate.fullname }}</td>
+
+                <td>{{ candidate.position }}</td>
+
+                <td>{{ candidate.total_votes }}</td>
+
+                <td>
+
+                    {% if published %}
+
+                    <span class="published">Published</span>
+
+                    {% else %}
+
+                    <span class="hidden">Hidden</span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endif %}
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endfor %}
+
+
+
+<!-- ================= WINNERS ================= -->
+
+<div class="winner-section">
+
+    <h2>🏆 Election Winners</h2>
+
+    <table class="winner-table">
+
+        <thead>
+
+            <tr>
+                <th>Position</th>
+                <th>Photo</th>
+                <th>Winner</th>
+                <th>Votes</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for winner in winners %}
+
+            <tr>
+
+                <td>{{ winner.position }}</td>
+
+                <td>
+
+                    <img src="{{ url_for('static', filename='uploads/' + winner.photo) }}"
+                         class="winner-photo">
+
+                </td>
+
+                <td>{{ winner.fullname }}</td>
+
+                <td>{{ winner.total_votes }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+<script>
+function printResults() {
+
+    var printContents = document.getElementById("print-area").innerHTML;
+
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+
+    location.reload();
+
+}
+</script>
+
+{% endblock %}

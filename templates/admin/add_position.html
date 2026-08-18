@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Position</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h2>Add Election Position</h2>
+
+       <form method="POST">
+    <div class="mb-3">
+        <label>Position Name</label>
+        <input
+            type="text"
+            name="position_name"
+            class="form-control"
+            required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Add Position
+    </button>
+</form>
+    <br>
+
+    <a href="/positions">← Back to Positions</a>
+
+</div>
+
+</body>
+</html>

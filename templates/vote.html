@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Cast Vote</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+.position-box{
+    background:white;
+    margin:20px;
+    padding:20px;
+    border-radius:10px;
+}
+
+.candidate{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    border:1px solid #ddd;
+    padding:15px;
+    margin:10px;
+    border-radius:8px;
+}
+
+.candidate img{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+h2{
+    color:#003366;
+}
+
+.vote-btn{
+    padding:12px 30px;
+    background:#0066cc;
+    color:white;
+    border:none;
+    border-radius:8px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1 align="center">
+Kigezi High School Elections
+</h1>
+
+
+<form method="POST" action="/cast_vote">
+
+
+{% for position, candidates in positions.items() %}
+
+
+<div class="position-box">
+
+
+<h2>{{ position }}</h2>
+
+
+{% for candidate in candidates %}
+
+
+<div class="candidate">
+
+
+<input 
+type="radio"
+name="{{ position }}"
+value="{{ candidate['id'] }}"
+required>
+
+
+<img src="{{ url_for('static', filename='uploads/' + candidate['photo']) }}">
+
+
+<div>
+
+<h3>
+{{ candidate['fullname'] }}
+</h3>
+
+<p>
+{{ candidate['position'] }}
+</p>
+
+</div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+<button class="vote-btn">
+Submit Vote
+</button>
+
+
+
+</form>
+
+
+</body>
+</html>

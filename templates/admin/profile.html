@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+
+{% block title %}My Profile{% endblock %}
+{% block heading %}My Profile{% endblock %}
+
+{% block content %}
+
+<div class="profile-page">
+
+    <div class="profile-card">
+
+        <img src="{{ url_for('static', filename='uploads/' + admin.photo) }}"
+             class="profile-photo-large">
+
+        <h2>{{ admin.username }}</h2>
+
+        <p>{{ admin.role|title }}</p>
+
+        <span class="badge">{{ admin.status }}</span>
+
+    </div>
+
+    <div class="profile-details">
+
+        <table class="table">
+
+            <tr>
+                <th>Username</th>
+                <td>{{ admin.username }}</td>
+            </tr>
+
+            <tr>
+                <th>Email</th>
+                <td>{{ admin.email or "-" }}</td>
+            </tr>
+
+            <tr>
+                <th>Phone</th>
+                <td>{{ admin.phone or "-" }}</td>
+            </tr>
+
+            <tr>
+                <th>Role</th>
+                <td>{{ admin.role }}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td>{{ admin.status }}</td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <a href="{{ url_for('edit_profile') }}" class="btn">
+            <i class="fas fa-user-edit"></i>
+            Edit Profile
+        </a>
+
+        <a href="{{ url_for('admin_change_password') }}" class="btn">
+            <i class="fas fa-lock"></i>
+            Change Password
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

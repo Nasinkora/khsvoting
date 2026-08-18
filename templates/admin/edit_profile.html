@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+{% block heading %}Edit Profile{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+<form method="POST"
+      enctype="multipart/form-data">
+
+<label>Username</label>
+
+<input type="text"
+       name="username"
+       value="{{ admin.username }}">
+
+<label>Email</label>
+
+<input type="email"
+       name="email"
+       value="{{ admin.email }}">
+
+<label>Phone</label>
+
+<input type="text"
+       name="phone"
+       value="{{ admin.phone }}">
+
+<label>Profile Picture</label>
+
+<input type="file"
+       name="photo">
+
+<br><br>
+
+<button class="btn-save">
+
+Save Changes
+
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}
