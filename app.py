@@ -1,6 +1,3 @@
-from flask import Flask
-
-app = Flask(__name__)
 import os
 import sqlite3
 from functools import wraps
