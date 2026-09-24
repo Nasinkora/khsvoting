@@ -13,7 +13,7 @@
 
     <div class="page-actions">
 
-     <button onclick="window.print()" class="print-btn">
+     <button onclick="printResults()" class="print-btn">
        <i class="fas fa-print"></i> Print Results
      </button>
 
@@ -37,6 +37,11 @@
 <!-- ================= RESULTS ================= -->
 
 <div id="print-area">
+
+<div class="print-heading">
+    <h1>Kigezi High School â€” Election Results</h1>
+    <p>Official election results</p>
+</div>
 
 {% for position in positions %}
 
@@ -123,7 +128,7 @@
 
 <div class="winner-section">
 
-    <h2>🏆 Election Winners</h2>
+    <h2>ðŸ† Election Winners</h2>
 
     <table class="winner-table">
 
